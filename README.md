@@ -9,6 +9,3 @@ This repository contains firmware for [Core Module](https://shop.bigclown.com/co
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT/) - see the [LICENSE](LICENSE) file for details.
 
----
-
-Made with &#x2764;&nbsp; by [**HARDWARIO s.r.o.**](https://www.hardwario.com/) in the heart of Europe.
