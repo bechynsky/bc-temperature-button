@@ -17,12 +17,23 @@ void button_event_handler(bc_button_t *self, bc_button_event_t event, void *even
         return;
     }
 
+    // invoke meassurement
+    bc_tmp112_measure(&temp);
+}
+
+void tmp112_event_handler(bc_tmp112_t *self, bc_tmp112_event_t event, void *event_param)
+{
+    if (event != BC_TMP112_EVENT_UPDATE)
+    {
+        return;
+    }
+
     float value;
     
-    bc_tmp112_measure(&temp);
-
+    // read meassured temperature
     if (bc_tmp112_get_temperature_celsius(&temp, &value))
     {
+        // Send data
         bc_radio_pub_temperature(0, &value);
     }
     
@@ -45,9 +56,9 @@ void application_init(void)
 
     // initialize TMP112 sensor
     bc_tmp112_init(&temp, BC_I2C_I2C0, 0x49);
-
+    bc_tmp112_set_event_handler(&temp, tmp112_event_handler, NULL);
+    
     bc_radio_pairing_request("temperature-button", VERSION);
 
-   
     bc_led_pulse(&led, 2000);
 }
